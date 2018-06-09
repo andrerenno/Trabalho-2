@@ -7,7 +7,7 @@ O programa pode também armazenar as informações em arquivos, os quais pode le
 
 **Instalação - Linux** 
 
-Para instalar no sistema operacional Linux, basta verificar que o ncurses está instalado e compilar o programa com o gcc. Essa biblioteca já vem instalada em vários sistemas, porém se não estiver, basta instalar o pacote que a contém (por exemplo, para arch, o pacote ncurses). para compilar, use o comando: 
+Para instalar no sistema operacional Linux, basta verificar que o ncurses está instalado e compilar o programa com o gcc. Essa biblioteca já vem instalada em vários sistemas, porém se não estiver, basta instalar o pacote que a contém (por exemplo, para arch, o pacote ncurses e, para ubuntu, libncurses-dev). para compilar, use o comando: 
 gcc -o trab2 main.c groups.c file.c -lncurses -lm
 execute o programa com .\trab2 
 
