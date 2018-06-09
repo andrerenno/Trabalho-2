@@ -66,8 +66,24 @@ Student** user_add_student(Student** stud_arr){
     getnstr(inp_num, MAX_NAME);
     curs_set(0); noecho();
     attroff(A_STANDOUT);
+    
+    int studpos;
+    for(studpos = 0; stud_arr[studpos] != NULL; studpos++){
+        if (stud_arr[studpos] -> num  == atoi(inp_num))
+            break;
+    }
 
-    stud_arr = arr_add_student(new_student(inp_name, atoi(inp_num), 0,0,0,0,0,0), stud_arr);
+    if (stud_arr[studpos] == NULL)
+        stud_arr = arr_add_student(new_student(inp_name, atoi(inp_num), 0,0,0,0,0,0), stud_arr);
+    else {
+        mvprintw(10, (maxcol - 50)/2, "There is already a student with this number! ");
+        attron(A_STANDOUT);
+        printw("OK");
+        attroff(A_STANDOUT);
+        getch();
+    }
+
+        
     return stud_arr;
 }
 void user_rm_student(int arrpos, Student** stud_arr){
