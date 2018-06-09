@@ -114,31 +114,77 @@ void show_student(Student* stud){
     int boxwidth = 45;
     int boxheight = 25;
 
-    draw_box((maxrow - boxheight) / 2, (maxcol - boxwidth) / 2, boxwidth, boxheight );
+    int cfgboxwidth = 15;
+    int cfgboxheight = 4;
+
+    int ch = -1;
+
+    char inp_grade[MAX_INPUT];
+
+    do{
+        if (ch == '1'){
+            draw_box((maxrow - cfgboxheight) / 2, (maxcol - cfgboxwidth) / 2, cfgboxwidth, cfgboxheight);
+            
+            mvprintw((maxrow - cfgboxheight) / 2 + 2, (maxcol - cfgboxwidth ) / 2 + 1, "P1 score: ");  
+            attron(A_STANDOUT);
+            for (int i = 0; i < cfgboxwidth - 10; i++) addch(' ');
+            attroff(A_STANDOUT);
+
+            move((maxrow - cfgboxheight) / 2 + 2, (maxcol - cfgboxwidth) / 2 + 10);
+            attron(A_STANDOUT);
+            curs_set(1); echo();
+            getnstr(inp_grade, MAX_INPUT);
+            curs_set(0); noecho();
+            attroff(A_STANDOUT);
+
+            stud -> test[0] = atof(inp_grade);
+        }
+        if (ch == '2'){
+            draw_box((maxrow - cfgboxheight) / 2, (maxcol - cfgboxwidth) / 2, cfgboxwidth, cfgboxheight);
+            
+            mvprintw((maxrow - cfgboxheight) / 2 + 2, (maxcol - cfgboxwidth ) / 2 + 1, "P2 score: ");  
+            attron(A_STANDOUT);
+            for (int i = 0; i < cfgboxwidth - 10; i++) addch(' ');
+            attroff(A_STANDOUT);
+
+            move((maxrow - cfgboxheight) / 2 + 2, (maxcol - cfgboxwidth) / 2 + 10);
+            attron(A_STANDOUT);
+            curs_set(1); echo();
+            getnstr(inp_grade, MAX_INPUT);
+            curs_set(0); noecho();
+            attroff(A_STANDOUT);
+
+            stud -> test[1] = atof(inp_grade);
+        }
+        draw_box((maxrow - boxheight) / 2, (maxcol - boxwidth) / 2, boxwidth, boxheight );
     
-    mvprintw((maxrow - boxheight) / 2 + 1, (maxcol - boxwidth) / 2 + 1, "Name: %s", stud -> name);
-    mvprintw((maxrow - boxheight) / 2 + 2, (maxcol - boxwidth) / 2 + 1, "Number: %ld", stud -> num);
+        mvprintw((maxrow - boxheight) / 2 + 1, (maxcol - boxwidth) / 2 + 1, "Name: %s", stud -> name);
+        mvprintw((maxrow - boxheight) / 2 + 2, (maxcol - boxwidth) / 2 + 1, "Number: %ld", stud -> num);
     
-    mvprintw((maxrow - boxheight) / 2 + 4, (maxcol - boxwidth) / 2 + 1, "P1 score: %.2lf", stud -> test[0]);
-    mvprintw((maxrow - boxheight) / 2 + 5, (maxcol - boxwidth) / 2 + 1, "P2 score: %.2lf", stud -> test[1]);
+        mvprintw((maxrow - boxheight) / 2 + 4, (maxcol - boxwidth) / 2 + 1, "P1 score: %.2lf", stud -> test[0]);
+        mvprintw((maxrow - boxheight) / 2 + 5, (maxcol - boxwidth) / 2 + 1, "P2 score: %.2lf", stud -> test[1]);
 
-    float test_avg = (stud -> test[0] + stud -> test[1]) / 2;
-    mvprintw((maxrow - boxheight) / 2 + 7, (maxcol - boxwidth) / 2 + 1, "Test average: %.2lf", test_avg) ;
+        float test_avg = (stud -> test[0] + stud -> test[1]) / 2;
+        mvprintw((maxrow - boxheight) / 2 + 7, (maxcol - boxwidth) / 2 + 1, "Test average: %.2lf", test_avg) ;
     
-    mvprintw((maxrow - boxheight) / 2 + 9, (maxcol - boxwidth) / 2 + 1, "Assignment 1: %.2lf", stud -> assignment[0]);
-    mvprintw((maxrow - boxheight) / 2 + 10, (maxcol - boxwidth) / 2 + 1, "Assignment 2: %.2lf", stud -> assignment[1]);
-    mvprintw((maxrow - boxheight) / 2 + 11, (maxcol - boxwidth) / 2 + 1, "Assignment 3: %.2lf", stud -> assignment[2]);
-    mvprintw((maxrow - boxheight) / 2 + 12, (maxcol - boxwidth) / 2 + 1, "Assignment 4: %.2lf", stud -> assignment[3]);
+        mvprintw((maxrow - boxheight) / 2 + 9, (maxcol - boxwidth) / 2 + 1, "Assignment 1: %.2lf", stud -> assignment[0]);
+        mvprintw((maxrow - boxheight) / 2 + 10, (maxcol - boxwidth) / 2 + 1, "Assignment 2: %.2lf", stud -> assignment[1]);
+        mvprintw((maxrow - boxheight) / 2 + 11, (maxcol - boxwidth) / 2 + 1, "Assignment 3: %.2lf", stud -> assignment[2]);
+        mvprintw((maxrow - boxheight) / 2 + 12, (maxcol - boxwidth) / 2 + 1, "Assignment 4: %.2lf", stud -> assignment[3]);
 
-    float assignment_avg = (stud -> assignment[0] + stud -> assignment[1] + stud -> assignment[2] + stud -> assignment[3]) / 4;
-    mvprintw((maxrow - boxheight) / 2 + 14, (maxcol - boxwidth) / 2 + 1, "Assignment average: %.2lf", assignment_avg) ;
+        float assignment_avg = (stud -> assignment[0] + stud -> assignment[1] + stud -> assignment[2] + stud -> assignment[3]) / 4;
+        mvprintw((maxrow - boxheight) / 2 + 14, (maxcol - boxwidth) / 2 + 1, "Assignment average: %.2lf", assignment_avg) ;
+    
+        mvprintw((maxrow - boxheight) / 2 + 16, (maxcol - boxwidth) / 2 + 1, "Final score: %.2lf", sqrt(test_avg * assignment_avg)) ;
 
-    mvprintw((maxrow - boxheight) / 2 + 16, (maxcol - boxwidth) / 2 + 1, "Final score: %.2lf", sqrt(test_avg * assignment_avg)) ;
-
-    getch();
+        mvprintw((maxrow - boxheight) / 2 + 19, (maxcol - boxwidth) / 2 + 1, "Press 1 or 2 to change the P1 and P2 scores.") ;
+        mvprintw((maxrow - boxheight) / 2 + 21, (maxcol - boxwidth) / 2 + 1, "The assignment scores can be changed in the ") ;
+        mvprintw((maxrow - boxheight) / 2 + 22, (maxcol - boxwidth) / 2 + 1, "groups menu") ;
+    
+    } while ((ch = getch()) != '\n' && ch != 'q');
 }
 
-void list_students(Student** stud_arr){
+Student** list_students(Student** stud_arr){
 
     int maxrow, maxcol;
     getmaxyx(stdscr, maxrow, maxcol);
@@ -146,18 +192,44 @@ void list_students(Student** stud_arr){
     size_t arr_size;
     for (arr_size = 0; stud_arr[arr_size] != NULL; arr_size++);
 
+    int max, min;
+    min = 0;
+    if (arr_size < 9)
+        max = arr_size;
+    else max = 8;
+
     int ch = 0;
     int curpos = 0;
 
+    char msg[200];
+
+
+
     do {
+        strcpy(msg, "");
 
         /* Handles cursor movement */
 		if (ch == KEY_UP || ch == 'w' || ch == 'W')
 			curpos = (curpos - 1);	
  		else if (ch == KEY_DOWN || ch == 's' || ch == 'S')
 			curpos = (curpos + 1) % arr_size;
-        if (curpos < 0)
+        if (curpos < 0){
             curpos = arr_size - 1;
+            max = arr_size;
+            min = (arr_size > 8 ? max - 8: 0);
+        }
+        if (curpos == 0){
+            min = 0;
+            max = (arr_size > 8 ? 8 : arr_size);
+        }
+        if (curpos > (max - 1)){
+            max++;
+            min++;
+        }
+        if (curpos < min){
+            max--;
+            min--;
+        }
 
         if (ch == '+'){
             stud_arr = user_add_student(stud_arr);
@@ -169,8 +241,10 @@ void list_students(Student** stud_arr){
         if (ch == 'N' || ch == 'n')
             sort_students(stud_arr);
 
-        if (ch == 'P' || ch == 'p')
+        if (ch == 'P' || ch == 'p'){
             write_students(stud_arr);
+            strcat(msg, "Students written to 'Students.txt' file.\n");
+        }    
 
         if (ch == '\n')
             show_student(stud_arr[curpos]);
@@ -178,40 +252,53 @@ void list_students(Student** stud_arr){
         clear();
         
         for (arr_size = 0; stud_arr[arr_size] != NULL; arr_size++);
+        if (arr_size < 9)
+            max = arr_size;
 
-        move ((maxrow - arr_size)/ 2 - 3 , (maxcol - MAX_NAME - MAX_NUM)/2);
+        mvprintw(3, (maxcol - strlen(msg)) / 2, msg);
+
+
+
+        move ((maxrow - (max > 8 ? 8 : max))/ 2 - 3 , (maxcol - MAX_NAME - MAX_NUM)/2);
         addch (ACS_ULCORNER);
         for (int i = 0; i < MAX_NAME + MAX_NUM - 1; i++) addch(ACS_HLINE);
         addch (ACS_URCORNER);
 
-        mvaddch ((maxrow - arr_size)/ 2 - 2 , (maxcol - MAX_NAME - MAX_NUM)/2 , ACS_VLINE);
-        mvprintw((maxrow - arr_size)/ 2 - 2 , (maxcol - MAX_NAME - MAX_NUM)/2 + 1 , "Name"); 
-        mvprintw((maxrow - arr_size)/ 2 - 2 , (maxcol - MAX_NAME - MAX_NUM)/2 + MAX_NAME , "Number");
-        mvaddch ((maxrow - arr_size)/ 2 - 2 , ((maxcol - MAX_NAME - MAX_NUM)/2 + (MAX_NAME + MAX_NUM)), ACS_VLINE);
+        mvaddch ((maxrow - (max > 8 ? 8 : max))/ 2 - 2 , (maxcol - MAX_NAME - MAX_NUM)/2 , ACS_VLINE);
+        mvprintw((maxrow - (max > 8 ? 8 : max))/ 2 - 2 , (maxcol - MAX_NAME - MAX_NUM)/2 + 1 , "Name"); 
+        mvprintw((maxrow - (max > 8 ? 8 : max))/ 2 - 2 , (maxcol - MAX_NAME - MAX_NUM)/2 + MAX_NAME , "Number");
+        mvaddch ((maxrow - (max > 8 ? 8 : max))/ 2 - 2 , ((maxcol - MAX_NAME - MAX_NUM)/2 + (MAX_NAME + MAX_NUM)), ACS_VLINE);
 
-        move ((maxrow - arr_size)/ 2 - 1 , (maxcol - MAX_NAME - MAX_NUM)/2);
+        move ((maxrow - (max > 8 ? 8 : max))/ 2 - 1 , (maxcol - MAX_NAME - MAX_NUM)/2);
         addch (ACS_LTEE);
         for (int i = 0; i < MAX_NAME + MAX_NUM - 1; i++) addch(ACS_HLINE);
         addch (ACS_RTEE);
+        
+            
 
-        for (int i = 0; i < arr_size; i++){
-            mvaddch((maxrow - arr_size)/ 2 + i, (maxcol - MAX_NAME - MAX_NUM)/2 , ACS_VLINE);
+        for (int i = min; i < max; i++){
+            mvaddch((maxrow - (max > 8? 8 : max))/ 2 + i -min, (maxcol - MAX_NAME - MAX_NUM)/2 , ACS_VLINE);
             if (curpos == i)
                 attron(A_STANDOUT);
             for (int j = 0; j < MAX_NAME + MAX_NUM; j++) printw(" ");
-            move((maxrow - arr_size)/ 2 + i, (maxcol - MAX_NAME - MAX_NUM)/2 + 1 );
+            move((maxrow - (max > 8? 8 : max))/ 2 + i - min, (maxcol - MAX_NAME - MAX_NUM)/2 + 1 );
             printw(stud_arr[i] -> name); 
-            mvprintw((maxrow - arr_size)/ 2 + i, (maxcol - MAX_NAME - MAX_NUM)/2 + MAX_NAME, "%d", stud_arr[i] -> num);
+            mvprintw((maxrow - (max > 8 ? 8 : max))/ 2 + i -min, (maxcol - MAX_NAME - MAX_NUM)/2 + MAX_NAME, "%d", stud_arr[i] -> num);
             attroff(A_STANDOUT);
-            mvaddch((maxrow - arr_size)/ 2 + i, (maxcol - MAX_NAME - MAX_NUM)/2 + MAX_NAME + MAX_NUM, ACS_VLINE);
+            mvaddch((maxrow - (max > 8 ? 8 : max))/ 2 + i -min, (maxcol - MAX_NAME - MAX_NUM)/2 + MAX_NAME + MAX_NUM, ACS_VLINE);
         }
 
-        move ((maxrow - arr_size)/ 2 + arr_size , (maxcol - MAX_NAME - MAX_NUM)/2);
+        move ((maxrow - (max > 8 ? 8 : max))/ 2 + (max > 8 ? 8 : max), (maxcol - MAX_NAME - MAX_NUM)/2);
         addch (ACS_LLCORNER);
         for (int i = 0; i < MAX_NAME + MAX_NUM - 1; i++) addch(ACS_HLINE);
         addch (ACS_LRCORNER);
 
-        move ((maxrow - arr_size)/ 2 + arr_size + 2 , (maxcol - 83)/2);
+        if (min > 0)
+            mvaddch((maxrow - 8)/ 2, (maxcol - MAX_NAME - MAX_NUM)/2 + MAX_NAME + MAX_NUM - 1, ACS_UARROW);
+        if (max < arr_size)
+            mvaddch((maxrow - 8)/ 2 + 7, (maxcol - MAX_NAME - MAX_NUM)/2 + MAX_NAME + MAX_NUM - 1, 'v');
+
+        move ((maxrow - (max > 8 ? 8 : max))/ 2 + (max > 8 ? 8 : max) + 2, (maxcol - 83)/2);
         attron(A_STANDOUT);
         printw("<ENTER> to see more info about student");
         attroff(A_STANDOUT);
@@ -226,7 +313,7 @@ void list_students(Student** stud_arr){
         printw("<-> to remove a student");
         attroff(A_STANDOUT);
 
-        move ((maxrow - arr_size)/ 2 + arr_size + 3 , (maxcol - 54)/2);
+        move ((maxrow - (max > 8 ? 8 : max))/ 2 + (max > 8 ? 8 : max) + 3 , (maxcol - 54)/2);
 
         attron(A_STANDOUT);
         printw("<Q> to go back");
@@ -245,6 +332,7 @@ void list_students(Student** stud_arr){
         ch = getch();
 
     } while (ch != 'q' && ch != 'Q' && ch != 27);
+    return stud_arr;
 }
 
 
@@ -309,28 +397,21 @@ Student** arr_rm_student(Student** stud_arr, Student* stud){
 int main(void){
 
     Student** stud_arr;
-    Group** group_arr;
-    stud_arr = get_students();
-    group_arr = malloc(sizeof(Group *));;
-    group_arr[0] = NULL;
-    if (stud_arr == NULL){
-        printw("Memory allocation error!\n");
+    Group*** group_arr;
+    char* error = malloc(200*sizeof(char));
+    stud_arr = get_students(error);
+    group_arr = get_groups(stud_arr, error); 
+    if (stud_arr == NULL || group_arr == NULL){
+        endwin();
+        printf("Memory allocation error!\n");
         return 1;
     }
-    /* TEMPORARY */
-    group_arr = realloc(group_arr, sizeof(Group *) + 2);
-    group_arr[0] = new_group(1, 9.8);
-    group_arr[1] = new_group(2, 5.3);
-    group_arr[2] = NULL;
-    group_add_member(stud_arr[0], group_arr[0]);
-    group_add_member(stud_arr[1], group_arr[1]);
     
 	initscr(); noecho();
 	keypad(stdscr, TRUE);
 	nodelay(stdscr, FALSE);
 	curs_set(0);
 
-    size_t num_of_students;
 
     int maxrow, maxcol;
     getmaxyx(stdscr, maxrow, maxcol);
@@ -342,6 +423,15 @@ int main(void){
     int curpos = 0;
 
     while(1){
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; group_arr[i][j] != NULL; j++){
+                size_t groupsize;
+                for (groupsize = 0; group_arr[i][j] -> members[groupsize] != NULL; groupsize++);
+                for (int k = 0; group_arr[i][j] -> members[k] != NULL; k++){
+                    group_arr[i][j] -> members[k] -> assignment[i] = (group_arr[i][j] -> grade) * (1 + (0.05 * (groupsize - 1))) * pow(0.9, k);
+                }
+            }
+        }
          
         do {
             if (ch == KEY_UP || ch == 'w' || ch == 'W')
@@ -361,34 +451,108 @@ int main(void){
 
             if (curpos == 0)
                 attron(A_STANDOUT);
-            mvprintw(maxrow / 2, (maxcol - 16) / 2, "LIST STUDENTS");
+            mvprintw(maxrow / 2, (maxcol - 13) / 2, "LIST STUDENTS");
             attroff(A_STANDOUT);
             if (curpos == 1)
                 attron(A_STANDOUT);
-            mvprintw(maxrow / 2 + 2, (maxcol - 16) / 2, "LIST GROUPS");
+            mvprintw(maxrow / 2 + 2, (maxcol - 11) / 2, "LIST GROUPS");
             attroff(A_STANDOUT);
             if (curpos == 2)
                 attron(A_STANDOUT);
-            mvprintw(maxrow / 2 + 4, (maxcol - 16) / 2, "QUIT\n");
+            mvprintw(maxrow / 2 + 4, (maxcol - 4) / 2, "QUIT\n");
             attroff(A_STANDOUT);
         } while((ch = getch()) != '\n'); 
+
         if (curpos == 0)
-            list_students(stud_arr);
-        if (curpos == 1)
-            list_groups(group_arr);
-        if (curpos == 2)
+            stud_arr = list_students(stud_arr);
+        else if (curpos == 1){
+            curpos = 0;
+            int wrote;
+            do { 
+            do {
+                if (ch == KEY_UP || ch == 'w' || ch == 'W')
+		    	    curpos = (curpos - 1);	
+ 		        else if (ch == KEY_DOWN || ch == 's' || ch == 'S')
+		    	    curpos = (curpos + 1) % 6;
+                if (curpos < 0)
+                    curpos = 5;
+            
+                clear();
+                if (wrote == 1){
+                    mvprintw(maxrow / 2 - 4 , (maxcol - 28) / 2, "Groups written to Groups.txt");
+                    wrote = 0;
+                }
+
+                if (curpos == 0)
+                    attron(A_STANDOUT);
+                mvprintw(maxrow / 2, (maxcol - 12) / 2, "ASSIGNMENT 1");
+                attroff(A_STANDOUT);
+                if (curpos == 1)
+                    attron(A_STANDOUT);
+                mvprintw(maxrow / 2 + 2, (maxcol - 12) / 2, "ASSIGNMENT 2");
+                attroff(A_STANDOUT);
+                if (curpos == 2)
+                    attron(A_STANDOUT);
+                mvprintw(maxrow / 2 + 4, (maxcol - 12) / 2, "ASSIGNMENT 3");
+                attroff(A_STANDOUT);
+                if (curpos == 3)
+                    attron(A_STANDOUT);
+                mvprintw(maxrow / 2 + 6, (maxcol - 12) / 2, "ASSIGNMENT 4");
+                attroff(A_STANDOUT);
+                if (curpos == 4)
+                    attron(A_STANDOUT);
+                mvprintw(maxrow / 2 + 8, (maxcol - 19) / 2, "SAVE GROUPS TO FILE");
+                attroff(A_STANDOUT);
+                if (curpos == 5)
+                    attron(A_STANDOUT);
+                mvprintw(maxrow / 2 + 10, (maxcol - 4) / 2, "QUIT");
+                attroff(A_STANDOUT);
+            } while((ch = getch()) != '\n' && ch != 'q'); 
+            if (curpos == 5 || ch == 'q'){
+                ch = 0;
+                break;
+            }
+            else if (curpos == 4){
+                write_groups(group_arr);
+                wrote = 1;
+            }
+            else
+                group_arr[curpos] = list_groups(group_arr[curpos], stud_arr);
+            } while (1);
+        }
+        else if (curpos == 2)
             break;
 
     }
     
+    size_t num_of_students;
     for (num_of_students = 0; stud_arr[num_of_students] != NULL; num_of_students++); 
+    size_t num_of_groups;
     
-    for (size_t i = 1; i < num_of_students; i++){
+    for (size_t i = 0; i < num_of_students; i++){
         free(stud_arr[i] -> name);
         free(stud_arr[i]);
     }
+    for (int j = 0; j < 4; j++){
+        for (num_of_groups = 0; group_arr[j][num_of_groups] != NULL; num_of_groups++); 
+        for (size_t i = 0; i < num_of_groups; i++){
+            free(group_arr[j][i] -> members);
+            free(group_arr[j][i]);
+        }
+    }
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; group_arr[i][j] != NULL; j++){
+            free(group_arr[i][j] -> members);
+            free(group_arr[i][j]);
+        }
+        free(group_arr[i]);
+    }
+    free(group_arr);
+    
+    free (error);
 
     endwin();
+
     return 0;
 }
 

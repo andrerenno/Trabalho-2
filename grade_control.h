@@ -13,7 +13,7 @@ typedef struct {
 } Group;
 
 /* Reads the students from the "Students.txt" file and returns them in an array */
-Student ** get_students(void);
+Student ** get_students(char*);
 
 /* Writes the array to the "Students.txt" file */
 void write_students(Student**);
@@ -32,6 +32,17 @@ void sort_students(Student**);
 
 void draw_box(int, int, int, int);
 
-void list_groups(Group**);
+Group** list_groups(Group**, Student**);
+
 Group* new_group(int, double);
+
 Group* group_add_member(Student*, Group*);
+
+/* Adds a group to the array of groups, handles the */ 
+/* reallocing and putting the NULL at the end of the array */
+Group** arr_add_group(Group**, Group*);
+
+Group*** get_groups(Student**, char*);
+void write_groups(Group***);
+
+void arr_rm_group(Group**, Group*);
